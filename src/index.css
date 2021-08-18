@@ -6,8 +6,35 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+a,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Work Sans', sans-serif;
+}
+
+:root {
+  --white: #ffffff;
+  --primary-color: #003060;
+  --secondary-color: #00e0d1;
+  --light-color: #f9f9f9;
+  --secondary-color-rgb: 0, 224, 209;
+  --primary-color-shade: #002a54;
+  --primary-color-contrast: #fff;
+  --primary-color-contrast-rgb: 255, 255, 255;
+  --light-color-shade: #f2f2f2;
+  --background-color: #fff;
+  --medium-color: #999;
+  --light-color: #f9f9f9;
 }

@@ -1,0 +1,100 @@
+.menu_wrapper {
+  padding: 10px;
+  background: var(--white);
+  min-width: 100px;
+  padding: 10px;
+}
+
+.menu {
+  height: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  width: 80px;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+    var(--primary-color-shade),
+    var(--primary-color)
+  );
+  text-align: center;
+  transition: all 0.2s ease-out;
+}
+.menu.open {
+  width: 250px;
+  transition: all 0.2s ease-out;
+}
+.menu_link {
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--primary-color-contrast);
+  text-decoration: none;
+  transition: all 0.2s ease-out;
+}
+.menu_link:hover {
+  opacity: 0.3;
+}
+.menu_link:hover span {
+  background: rgba(var(--primary-color-contrast-rgb), 0.6);
+}
+.menu_link.active span {
+  background-color: var(--primary-color-contrast);
+  color: var(--primary-color);
+}
+
+.menu_link .material-icons-round {
+  width: 60px;
+  display: flex !important;
+  justify-content: center !important;
+  min-width: 60px;
+  height: 60px;
+  font-size: 2.2rem;
+  margin-right: 20px;
+  border-radius: 5px;
+  transition: all 0.2s ease-out;
+  align-items: center !important;
+}
+
+button.menu_item {
+  width: 60px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(var(--primary-color-contrast-rgb), 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+button.menu_item::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  left: 18px;
+  top: 13px;
+  border-radius: 2px;
+  background-color: rgba(var(--primary-color-contrast-rgb), 0.6);
+  transition: all 0.2s ease-out;
+}
+button.menu_item.open::before {
+  transform: rotate(45deg) translate(4px, 3px);
+}
+button.menu_item::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  left: 18px;
+  bottom: 15px;
+  border-radius: 2px;
+  background-color: rgba(var(--primary-color-contrast-rgb), 0.6);
+  transition: all 0.2s ease-out;
+}
+button.menu_item.open::after {
+  transform: rotate(-45deg) translate(4px, -3px);
+}

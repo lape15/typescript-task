@@ -1,0 +1,85 @@
+.schedule_filter {
+  display: flex;
+  padding: 30px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--light-color-shade);
+  background-color: var(--background-color);
+}
+.item_box {
+  display: flex;
+  align-items: center;
+}
+.item_box label {
+  display: inline-block;
+  padding: 0;
+  margin-right: 5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  color: var(--medium-color);
+}
+
+.item_box select {
+  font-weight: 500;
+  padding: 8px 10px;
+  height: 35px;
+  border-radius: 10px;
+  text-transform: capitalize;
+  color: var(--text-color);
+  border: 1px solid var(--medium-color);
+  min-width: 200px;
+  max-width: 200px;
+  margin-left: 5px;
+}
+
+.icons_con {
+  display: flex;
+}
+
+input[type='radio'] {
+  display: inline-block;
+  visibility: hidden;
+  position: absolute;
+}
+
+label.icon {
+  background-color: var(--light-color-shade);
+  margin: 0 5px;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  position: relative;
+  color: var(--medium-color);
+  border: 1px solid var(--light-color-shade);
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.icon:hover {
+  background-color: var(--light-color);
+}
+.add_con {
+  flex: 1;
+  text-align: right;
+}
+
+.add_con button {
+  color: var(--primary-color-contrast);
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  font-size: inherit;
+}
+.add_con button:hover {
+  border-color: var(--primary-color-shade);
+  background-color: var(--primary-color-shade);
+}
