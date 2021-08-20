@@ -17,18 +17,16 @@ export const Dropdown = () => {
   }, [dispatch]);
   const { zones } = state;
 
-  const handleZoneNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setZone(event.target.value);
+  const handleZoneChange = (e: { target: HTMLSelectElement }) => {
+    setZone(e.target.value);
   };
 
   return (
     <div className="item_box">
       <label>
         Zones:
-        <select value={zone} onChange={(e) => setZone(e.target.value)}>
-          <option value="all" selected>
-            All zones
-          </option>
+        <select value={zone} onChange={handleZoneChange}>
+          <option value="all">All zones</option>
           {zones.map((zone: { name: string; id: number }) => (
             <option key={zone.id} value={zone.name}>
               {zone.name}

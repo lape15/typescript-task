@@ -33,8 +33,10 @@ textarea {
   --primary-color-shade: #002a54;
   --primary-color-contrast: #fff;
   --primary-color-contrast-rgb: 255, 255, 255;
+  --primary-color-rgb: 0, 48, 96;
   --light-color-shade: #f2f2f2;
   --background-color: #fff;
   --medium-color: #999;
   --light-color: #f9f9f9;
+  --medium-color-shade: #666;
 }

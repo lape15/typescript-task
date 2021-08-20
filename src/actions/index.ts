@@ -1,4 +1,4 @@
-import { ZoneActionTypes, Zone } from './types';
+import { ZoneActionTypes, Zone, ScheduledZones } from './types';
 
 export const changeTemperatureUnit = () => ({
   type: 'CHANGE_TEMP_UNIT',
@@ -14,4 +14,19 @@ export const fetchingZones = () => ({
 export const fetchedZones = (items: [Zone]) => ({
   type: ZoneActionTypes.FETCHED,
   payload: items,
+});
+
+export const changeLayout = (layout: string) => ({
+  type: ZoneActionTypes.CHANGE_LAYOUT,
+  payload: layout,
+});
+
+export const doShowAddScheduleModal = (show: boolean) => ({
+  type: ZoneActionTypes.ADD_SCHEDULE_MODAL,
+  payload: show,
+});
+
+export const addZonesToSchedule = (zones: ScheduledZones[]) => ({
+  type: ZoneActionTypes.ADD_ZONES_TOSCHEDULE,
+  payload: zones,
 });

@@ -6,6 +6,8 @@ import {
   changeTempUnit,
   Zone,
   ZoneActionTypes,
+  showAddScheduleModal,
+  addZoneToSchedule,
 } from '../actions/types';
 
 type State = {
@@ -13,23 +15,33 @@ type State = {
   addSchedule: boolean;
   loading: boolean;
   zones: Array<Zone>;
-  selectedZones: [Zone];
+  scheduledZones: [Zone];
   isFahrenheit: boolean;
+  layout: string;
+  showAddScheduleModal: boolean;
 };
 
 type ProviderProps = {
   children: React.ReactNode;
 };
 
-type ZoneActions = fetchingZones | fetchZones | changeLayout | changeTempUnit;
+type ZoneActions =
+  | fetchingZones
+  | fetchZones
+  | changeLayout
+  | changeTempUnit
+  | showAddScheduleModal
+  | addZoneToSchedule;
 
 const initialState = {
   isGrid: false,
   addSchedule: false,
   zones: [],
-  selectedZones: [],
+  scheduledZones: [],
   loading: true,
   isFahrenheit: true,
+  layout: 'list',
+  showAddScheduleModal: false,
 };
 
 function globalReducer(state: State, action: ZoneActions) {
@@ -54,6 +66,21 @@ function globalReducer(state: State, action: ZoneActions) {
         isFahrenheit: !state.isFahrenheit,
       };
 
+    case ZoneActionTypes.CHANGE_LAYOUT:
+      return {
+        ...state,
+        layout: payload,
+      };
+    case ZoneActionTypes.ADD_SCHEDULE_MODAL:
+      return {
+        ...state,
+        showAddScheduleModal: payload,
+      };
+    case ZoneActionTypes.ADD_ZONES_TOSCHEDULE:
+      return {
+        ...state,
+        scheduledZones: payload,
+      };
     default:
       return state;
   }
