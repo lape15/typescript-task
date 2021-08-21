@@ -24,7 +24,7 @@ const AddSchedule = () => {
   const { showAddScheduleModal } = state;
   const { zones } = state;
   const [availableZones, setAvailableZones] = useState<Zone[]>([zones]);
-  const [selectedZones, setSelectedZones] = useState<string[]>([]);
+  const [selectedZones, setSelectedZones] = useState<Zone[] | any>([]);
 
   useEffect(() => {
     setAvailableZones(zones);
@@ -33,16 +33,15 @@ const AddSchedule = () => {
   const handleInputChange = (e: {
     target: HTMLInputElement | HTMLSelectElement;
   }) => {
+    let oneZone = availableZones.find((zone) => zone.name === e.target.value);
     setZoneDetails({
       ...zoneDetails,
       [e.target.name]: e.target.value,
       isValid: checkValidity(),
     });
     if (e.target.name === 'zone') {
-      setSelectedZones([...selectedZones, e.target.value]);
-      const newZone = availableZones.filter(
-        (zone) => zone.name !== e.target.value
-      );
+      setSelectedZones([...selectedZones, oneZone]);
+      const newZone = availableZones.filter((zone) => zone.id !== oneZone?.id);
       setAvailableZones(newZone);
     }
   };
@@ -69,8 +68,8 @@ const AddSchedule = () => {
   };
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const final = selectedZones.map((zone) => ({
-      zone: zone,
+    const final = selectedZones.map((zone: Zone) => ({
+      zone: zone.name,
       temperature: Number(zoneDetails.temperature),
       time: zoneDetails.time,
     }));
@@ -86,12 +85,8 @@ const AddSchedule = () => {
       const slicedArr = [...selectedZones];
       tempArray.splice(index, 1);
       const sliced = slicedArr.slice(index, index + 1);
-      const mappedSliced = sliced.map((zone) => ({
-        name: zone,
-        id: Number((Math.random() * 20).toFixed()),
-      }));
       setSelectedZones([...tempArray]);
-      setAvailableZones([...availableZones, ...mappedSliced]);
+      setAvailableZones([...availableZones, ...sliced]);
     },
     [selectedZones, availableZones]
   );
@@ -115,14 +110,14 @@ const AddSchedule = () => {
             <label>Zones</label>
 
             <div className="selected_zones">
-              {selectedZones.map((zone, index) => (
+              {selectedZones.map((zone: Zone, index: number) => (
                 <button
                   type="button"
                   className="selected"
                   key={index}
                   onClick={() => deleteSelectedZone(index)}
                 >
-                  {zone}&nbsp;&nbsp;X
+                  {zone.name}&nbsp;&nbsp;X
                 </button>
               ))}
             </div>
@@ -134,7 +129,11 @@ const AddSchedule = () => {
               value={zoneDetails.zone}
               onChange={handleInputChange}
             >
-              <option value="Select Zones" defaultValue="SelectZones">
+              <option
+                value="Select Zones"
+                selected
+                style={{ pointerEvents: 'none' }}
+              >
                 Select Zones
               </option>
               {availableZones.map((zone: { name: string; id: number }) => (
