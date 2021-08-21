@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import ModalWrapper from '../modal/modal_wrapper';
 import { GlobalContext } from '../../context';
 import {
@@ -18,6 +18,7 @@ const AddSchedule = () => {
     zone: '',
     temperature: 0,
     time: '',
+    isValid: false,
   });
   const { state, dispatch } = useContext(GlobalContext);
   const { showAddScheduleModal } = state;
@@ -32,7 +33,11 @@ const AddSchedule = () => {
   const handleInputChange = (e: {
     target: HTMLInputElement | HTMLSelectElement;
   }) => {
-    setZoneDetails({ ...zoneDetails, [e.target.name]: e.target.value });
+    setZoneDetails({
+      ...zoneDetails,
+      [e.target.name]: e.target.value,
+      isValid: checkValidity(),
+    });
     if (e.target.name === 'zone') {
       setSelectedZones([...selectedZones, e.target.value]);
       const newZone = availableZones.filter(
@@ -42,7 +47,27 @@ const AddSchedule = () => {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!showAddScheduleModal) {
+      setZoneDetails({
+        zone: '',
+        temperature: 0,
+        time: '',
+        isValid: false,
+      });
+      setSelectedZones([]);
+      setAvailableZones(zones);
+    }
+  }, [showAddScheduleModal, zones]);
+
+  const checkValidity = () => {
+    let valid = true;
+    valid = zoneDetails.zone !== '' && valid;
+    valid = zoneDetails.temperature !== 0 && valid;
+    valid = zoneDetails.time !== '' && valid;
+    return valid;
+  };
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const final = selectedZones.map((zone) => ({
       zone: zone,
@@ -52,19 +77,34 @@ const AddSchedule = () => {
     dispatch(addZonesToSchedule(final));
   };
 
-  const deleteSelectedZone = (index: number) => {
-    const tempArray = selectedZones;
-    tempArray.splice(index, 1);
-    setSelectedZones(tempArray);
-  };
+  //This function will definetely need to be refactored to make it cleaner and more readable.
+  //I also need to find a way to generate unique ids for deleted zone going back to the dropdown
+
+  const deleteSelectedZone = useCallback(
+    (index: number) => {
+      const tempArray = selectedZones;
+      const slicedArr = [...selectedZones];
+      tempArray.splice(index, 1);
+      const sliced = slicedArr.slice(index, index + 1);
+      const mappedSliced = sliced.map((zone) => ({
+        name: zone,
+        id: Number((Math.random() * 20).toFixed()),
+      }));
+      setSelectedZones([...tempArray]);
+      setAvailableZones([...availableZones, ...mappedSliced]);
+    },
+    [selectedZones, availableZones]
+  );
 
   return (
     <ModalWrapper showModal={showAddScheduleModal}>
       <form className="form_wrapper" onSubmit={handleFormSubmit}>
-        {console.log({ availableZones })}
         <header>
           <h2>Schedule</h2>
-          <button onClick={() => dispatch(doShowAddScheduleModal(false))}>
+          <button
+            onClick={() => dispatch(doShowAddScheduleModal(false))}
+            type="button"
+          >
             <span className="Button_buttonIcon___rrTs material-icons-round">
               close
             </span>
@@ -77,6 +117,7 @@ const AddSchedule = () => {
             <div className="selected_zones">
               {selectedZones.map((zone, index) => (
                 <button
+                  type="button"
                   className="selected"
                   key={index}
                   onClick={() => deleteSelectedZone(index)}
@@ -93,6 +134,9 @@ const AddSchedule = () => {
               value={zoneDetails.zone}
               onChange={handleInputChange}
             >
+              <option value="Select Zones" defaultValue="SelectZones">
+                Select Zones
+              </option>
               {availableZones.map((zone: { name: string; id: number }) => (
                 <option key={zone.id} value={zone.name}>
                   {zone.name}
@@ -140,7 +184,7 @@ const AddSchedule = () => {
             </span>
           </span>
 
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" disabled={!zoneDetails.isValid}>
             Save
           </button>
         </footer>

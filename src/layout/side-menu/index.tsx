@@ -26,7 +26,7 @@ export const SideMenu = () => {
         </NavLink>
         <NavLink
           className={'menu_link'}
-          to="/"
+          to="/zones"
           onClick={() => openMenu && handleMenu()}
         >
           <span className={`material-icons-round ${!openMenu && 'close'}`}>

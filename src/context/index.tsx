@@ -12,7 +12,7 @@ import {
 
 type State = {
   isGrid: boolean;
-  addSchedule: boolean;
+  // addSchedule: boolean;
   loading: boolean;
   zones: Array<Zone>;
   scheduledZones: [Zone];
@@ -35,7 +35,7 @@ type ZoneActions =
 
 const initialState = {
   isGrid: false,
-  addSchedule: false,
+  // addSchedule: false,
   zones: [],
   scheduledZones: [],
   loading: true,
@@ -80,6 +80,7 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         scheduledZones: payload,
+        showAddScheduleModal: false,
       };
     default:
       return state;
