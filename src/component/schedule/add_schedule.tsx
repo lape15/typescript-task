@@ -33,13 +33,13 @@ const AddSchedule = () => {
   const handleInputChange = (e: {
     target: HTMLInputElement | HTMLSelectElement;
   }) => {
-    let oneZone = availableZones.find((zone) => zone.name === e.target.value);
     setZoneDetails({
       ...zoneDetails,
       [e.target.name]: e.target.value,
       isValid: checkValidity(),
     });
     if (e.target.name === 'zone') {
+      let oneZone = availableZones.find((zone) => zone.name === e.target.value);
       setSelectedZones([...selectedZones, oneZone]);
       const newZone = availableZones.filter((zone) => zone.id !== oneZone?.id);
       setAvailableZones(newZone);
@@ -66,7 +66,7 @@ const AddSchedule = () => {
     valid = zoneDetails.time !== '' && valid;
     return valid;
   };
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const final = selectedZones.map((zone: Zone) => ({
       zone: zone.name,
@@ -77,7 +77,6 @@ const AddSchedule = () => {
   };
 
   //This function will definetely need to be refactored to make it cleaner and more readable.
-  //I also need to find a way to generate unique ids for deleted zone going back to the dropdown
 
   const deleteSelectedZone = useCallback(
     (index: number) => {
@@ -131,8 +130,8 @@ const AddSchedule = () => {
             >
               <option
                 value="Select Zones"
-                selected
-                style={{ pointerEvents: 'none' }}
+                // selected
+                style={{ pointerEvents: 'none', opacity: 0.5 }}
               >
                 Select Zones
               </option>

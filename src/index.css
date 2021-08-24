@@ -39,4 +39,7 @@ textarea {
   --medium-color: #999;
   --light-color: #f9f9f9;
   --medium-color-shade: #666;
+  --danger-color-rgb: 216, 30, 91;
+  --danger-color-shade: #b4184c;
+  --danger-color: #d81e5b;
 }

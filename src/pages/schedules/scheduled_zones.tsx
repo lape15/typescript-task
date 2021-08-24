@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import { GlobalContext } from '../../context';
 import './schedule.css';
 import Zone from './zone';
@@ -8,16 +8,22 @@ interface AZone {
   temperature: number;
   time: string;
 }
-const ScheduledZones = () => {
+
+const getLayOutClass = (layout: string) => {
+  if (layout === 'list') return 'list';
+  else return 'grid';
+};
+const ScheduledZones = (props: any) => {
   const { state } = useContext(GlobalContext);
-  const { scheduledZones } = state;
+  const { scheduledZones, layout } = state;
+
   return (
     <div className="list_con">
       <h2 className="list_title">All zones({scheduledZones.length})</h2>
       {scheduledZones.length ? (
-        <ul className="list">
+        <ul className={`${getLayOutClass(layout)}`}>
           {scheduledZones.map((zone: AZone, index: number) => (
-            <Zone zone={zone} key={index} />
+            <Zone zone={zone} key={index} {...props} index={index} />
           ))}
         </ul>
       ) : (
@@ -30,4 +36,4 @@ const ScheduledZones = () => {
   );
 };
 
-export default ScheduledZones;
+export default memo(ScheduledZones);

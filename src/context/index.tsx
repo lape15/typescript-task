@@ -79,7 +79,7 @@ function globalReducer(state: State, action: ZoneActions) {
     case ZoneActionTypes.ADD_ZONES_TOSCHEDULE:
       return {
         ...state,
-        scheduledZones: payload,
+        scheduledZones: [...state.scheduledZones, ...payload],
         showAddScheduleModal: false,
       };
     default:
