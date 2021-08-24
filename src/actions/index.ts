@@ -30,3 +30,13 @@ export const addZonesToSchedule = (zones: ScheduledZones[]) => ({
   type: ZoneActionTypes.ADD_ZONES_TOSCHEDULE,
   payload: zones,
 });
+
+export const saveEditedZone = (index: number, zone: any) => ({
+  type: ZoneActionTypes.SAVE_EDITED_ZONE,
+  payload: { index, zone },
+});
+
+export const deleteZone = (index: number) => ({
+  type: ZoneActionTypes.DELETE_ZONE,
+  payload: index,
+});

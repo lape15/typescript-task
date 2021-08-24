@@ -4,6 +4,8 @@ export enum ZoneActionTypes {
   CHANGE_LAYOUT = 'CHANGE_LAYOUT',
   ADD_SCHEDULE_MODAL = 'ADD_SCHEDULE_MODAL',
   ADD_ZONES_TOSCHEDULE = 'ADD_ZONES_TOSCHEDULE',
+  SAVE_EDITED_ZONE = 'SAVE_EDITED_ZONE',
+  DELETE_ZONE = 'DELETE_ZONE',
 }
 export interface Zone {
   name: string;
@@ -40,4 +42,13 @@ export interface addZoneToSchedule {
 export interface showAddScheduleModal {
   type: ZoneActionTypes.ADD_SCHEDULE_MODAL;
   payload: boolean;
+}
+export interface saveEditedZone {
+  type: ZoneActionTypes.SAVE_EDITED_ZONE;
+  payload: [Zone];
+}
+
+export interface deleteZone {
+  type: ZoneActionTypes.DELETE_ZONE;
+  payload: [];
 }

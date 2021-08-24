@@ -1,4 +1,6 @@
-import { memo, useState } from 'react';
+import { memo, useState, useContext } from 'react';
+import { deleteZone } from '../../actions';
+import { GlobalContext } from '../../context';
 import { EditZone } from './edit_zone';
 type Props = {
   zone: {
@@ -11,7 +13,9 @@ type Props = {
 const Zone: React.FC<Props> = (props) => {
   const [showEditModal, setSowEditModal] = useState(false);
   const { zone, index } = props;
+  const { dispatch } = useContext(GlobalContext);
   const handleShowEditModal = () => setSowEditModal(!showEditModal);
+
   return (
     <li>
       <div className="flex_container">
@@ -33,7 +37,11 @@ const Zone: React.FC<Props> = (props) => {
           <span className="material-icons-round">edit</span>
         </button>
         &nbsp;&nbsp;
-        <button type="button" className="del">
+        <button
+          type="button"
+          className="del"
+          onClick={() => dispatch(deleteZone(index))}
+        >
           <span className="material-icons-round">delete_outline</span>
         </button>
       </div>

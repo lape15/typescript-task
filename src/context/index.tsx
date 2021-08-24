@@ -8,6 +8,8 @@ import {
   ZoneActionTypes,
   showAddScheduleModal,
   addZoneToSchedule,
+  saveEditedZone,
+  deleteZone,
 } from '../actions/types';
 
 type State = {
@@ -31,7 +33,9 @@ type ZoneActions =
   | changeLayout
   | changeTempUnit
   | showAddScheduleModal
-  | addZoneToSchedule;
+  | addZoneToSchedule
+  | saveEditedZone
+  | deleteZone;
 
 const initialState = {
   isGrid: false,
@@ -82,6 +86,28 @@ function globalReducer(state: State, action: ZoneActions) {
         scheduledZones: [...state.scheduledZones, ...payload],
         showAddScheduleModal: false,
       };
+
+    case ZoneActionTypes.SAVE_EDITED_ZONE: {
+      const { scheduledZones } = state;
+      const { index, zone } = payload;
+      let holdingState = [...scheduledZones];
+      holdingState.splice(index, 1, zone);
+      return {
+        ...state,
+        scheduledZones: holdingState,
+      };
+    }
+
+    case ZoneActionTypes.DELETE_ZONE: {
+      const { scheduledZones } = state;
+      const { index } = payload;
+      let tempState = [...scheduledZones];
+      tempState.splice(index, 1);
+      return {
+        ...state,
+        scheduledZones: tempState,
+      };
+    }
     default:
       return state;
   }

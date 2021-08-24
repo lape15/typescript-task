@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { saveEditedZone } from '../../actions';
 import ModalWrapper from '../../component/modal/modal_wrapper';
 import { GlobalContext } from '../../context';
 
@@ -12,9 +13,14 @@ type Props = {
   showModal: boolean;
   handleShowEditModal: () => void;
 };
+interface editedZone {
+  zone: string;
+  temperature: number;
+  time: string;
+}
 
 export const EditZone: React.FC<Props> = (props) => {
-  const { state } = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
   const { zone, index, showModal, handleShowEditModal } = props;
   const [zoneDetails, setZoneDetails] = useState({
     zone: zone.zone,
@@ -39,10 +45,16 @@ export const EditZone: React.FC<Props> = (props) => {
     valid = zoneDetails.time !== '' && valid;
     return valid;
   };
-  console.log(index);
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(zoneDetails, 'I HAVE BEEN CALLED');
+    const editedZone: editedZone = {
+      zone: zoneDetails.zone,
+      temperature: zoneDetails.temperature,
+      time: zoneDetails.time,
+    };
+    dispatch(saveEditedZone(index, editedZone));
+    handleShowEditModal();
   };
 
   return (
