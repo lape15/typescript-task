@@ -113,10 +113,10 @@ footer {
   transition: all 0.3s ease-out;
 }
 
-.material-icons-round.thermo.f {
+/* .material-icons-round.thermo.f {
   right: 4px;
   transition: all 0.3s ease-out;
-}
+} */
 
 footer .btn {
   color: var(--primary-color-contrast);

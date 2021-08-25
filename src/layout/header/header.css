@@ -44,10 +44,13 @@ nav {
 .material-icons-round.thermo {
   color: #fff;
   position: absolute;
-  transition: all 0.2s ease-out;
 }
 
 .material-icons-round.thermo.f {
-  right: 4px;
+  left: 7px;
+  transition: all 0.2s ease-out;
+}
+.material-icons-round.thermo.c {
+  right: 7px;
   transition: all 0.2s ease-out;
 }

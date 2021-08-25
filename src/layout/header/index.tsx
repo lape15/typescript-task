@@ -15,7 +15,7 @@ export const Header: React.FC<Props> = (props) => {
       <button className="header_btn">
         <h2>Schedules</h2>
       </button>
-      <span className="header_btn2">
+      <span className="header_btn2" title="Temperature unit">
         <span
           className={`material-icons-round thermo ${
             state.isFahrenheit ? 'f' : 'c'
@@ -24,8 +24,8 @@ export const Header: React.FC<Props> = (props) => {
         >
           thermostat
         </span>
-        <span onClick={() => dispatch(changeTemperatureUnit())}>&#8451;</span>
         <span onClick={() => dispatch(changeTemperatureUnit())}>&#8457;</span>
+        <span onClick={() => dispatch(changeTemperatureUnit())}>&#8451;</span>
       </span>
     </nav>
   );

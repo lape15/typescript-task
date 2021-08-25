@@ -46,6 +46,7 @@ const AddSchedule = () => {
     }
   };
 
+  // to reset input fields and selected zones
   useEffect(() => {
     if (!showAddScheduleModal) {
       setZoneDetails({

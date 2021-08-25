@@ -12,6 +12,8 @@ import {
   deleteZone,
 } from '../actions/types';
 
+import { changeTempValue } from './util';
+
 type State = {
   isGrid: boolean;
   // addSchedule: boolean;
@@ -39,7 +41,6 @@ type ZoneActions =
 
 const initialState = {
   isGrid: false,
-  // addSchedule: false,
   zones: [],
   scheduledZones: [],
   loading: true,
@@ -68,6 +69,10 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         isFahrenheit: !state.isFahrenheit,
+        scheduledZones: changeTempValue(
+          !state.isFahrenheit,
+          state.scheduledZones
+        ),
       };
 
     case ZoneActionTypes.CHANGE_LAYOUT:
