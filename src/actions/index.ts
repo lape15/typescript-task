@@ -38,5 +38,10 @@ export const saveEditedZone = (index: number, zone: any) => ({
 
 export const deleteZone = (index: number) => ({
   type: ZoneActionTypes.DELETE_ZONE,
-  payload: index,
+  payload: { index },
+});
+
+export const filterScheduledZones = (zoneName: string) => ({
+  type: ZoneActionTypes.FILTER_SCHEDULED_ZONES,
+  payload: { zoneName },
 });

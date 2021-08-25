@@ -6,6 +6,7 @@ export enum ZoneActionTypes {
   ADD_ZONES_TOSCHEDULE = 'ADD_ZONES_TOSCHEDULE',
   SAVE_EDITED_ZONE = 'SAVE_EDITED_ZONE',
   DELETE_ZONE = 'DELETE_ZONE',
+  FILTER_SCHEDULED_ZONES = 'FILTER_SCHEDULED_ZONES',
 }
 export interface Zone {
   name: string;
@@ -50,5 +51,10 @@ export interface saveEditedZone {
 
 export interface deleteZone {
   type: ZoneActionTypes.DELETE_ZONE;
+  payload: [];
+}
+
+export interface filerScheduledZones {
+  type: ZoneActionTypes.FILTER_SCHEDULED_ZONES;
   payload: [];
 }

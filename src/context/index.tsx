@@ -10,6 +10,8 @@ import {
   addZoneToSchedule,
   saveEditedZone,
   deleteZone,
+  filerScheduledZones,
+  ScheduledZones,
 } from '../actions/types';
 
 import { changeTempValue } from './util';
@@ -19,7 +21,7 @@ type State = {
   // addSchedule: boolean;
   loading: boolean;
   zones: Array<Zone>;
-  scheduledZones: [Zone];
+  scheduledZones: [ScheduledZones];
   isFahrenheit: boolean;
   layout: string;
   showAddScheduleModal: boolean;
@@ -37,7 +39,8 @@ type ZoneActions =
   | showAddScheduleModal
   | addZoneToSchedule
   | saveEditedZone
-  | deleteZone;
+  | deleteZone
+  | filerScheduledZones;
 
 const initialState = {
   isGrid: false,
@@ -111,6 +114,21 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         scheduledZones: tempState,
+      };
+    }
+    case ZoneActionTypes.FILTER_SCHEDULED_ZONES: {
+      const { scheduledZones } = state;
+      const { zoneName } = payload;
+      console.log(zoneName, 'zoneName');
+      const holdingArr = [...scheduledZones];
+      const filteredZones =
+        zoneName === 'all'
+          ? scheduledZones
+          : holdingArr.filter((zone) => zone.zone === zoneName);
+      console.log({ filteredZones, zoneName });
+      return {
+        ...state,
+        scheduledZones: filteredZones,
       };
     }
     default:

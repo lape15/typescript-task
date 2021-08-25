@@ -1,6 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../../context';
-import { fetchedZones, fetchingZones } from '../../actions';
+import {
+  fetchedZones,
+  fetchingZones,
+  filterScheduledZones,
+} from '../../actions';
 
 const ZONES_URL =
   'https://my-json-server.typicode.com/ivanturianytsia-envio/json-data/zones';
@@ -19,6 +23,7 @@ export const Dropdown = () => {
 
   const handleZoneChange = (e: { target: HTMLSelectElement }) => {
     setZone(e.target.value);
+    dispatch(filterScheduledZones(e.target.value));
   };
 
   return (
