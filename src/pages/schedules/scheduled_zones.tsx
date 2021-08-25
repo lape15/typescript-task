@@ -15,14 +15,14 @@ const getLayOutClass = (layout: string) => {
 };
 const ScheduledZones = (props: any) => {
   const { state } = useContext(GlobalContext);
-  const { scheduledZones, layout } = state;
+  const { layout, filteredZones } = state;
 
   return (
     <div className="list_con">
-      <h2 className="list_title">All zones({scheduledZones.length})</h2>
-      {scheduledZones.length ? (
+      <h2 className="list_title">All zones({filteredZones.length})</h2>
+      {filteredZones.length ? (
         <ul className={`${getLayOutClass(layout)}`}>
-          {scheduledZones.map((zone: AZone, index: number) => (
+          {filteredZones.map((zone: AZone, index: number) => (
             <Zone zone={zone} key={index} {...props} index={index} />
           ))}
         </ul>

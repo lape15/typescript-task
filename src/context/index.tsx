@@ -25,6 +25,7 @@ type State = {
   isFahrenheit: boolean;
   layout: string;
   showAddScheduleModal: boolean;
+  filteredZones: [ScheduledZones];
 };
 
 type ProviderProps = {
@@ -50,6 +51,7 @@ const initialState = {
   isFahrenheit: true,
   layout: 'list',
   showAddScheduleModal: false,
+  filteredZones: [],
 };
 
 function globalReducer(state: State, action: ZoneActions) {
@@ -76,6 +78,10 @@ function globalReducer(state: State, action: ZoneActions) {
           !state.isFahrenheit,
           state.scheduledZones
         ),
+        filteredZones: changeTempValue(
+          !state.isFahrenheit,
+          state.filteredZones
+        ),
       };
 
     case ZoneActionTypes.CHANGE_LAYOUT:
@@ -92,6 +98,7 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         scheduledZones: [...state.scheduledZones, ...payload],
+        filteredZones: [...state.scheduledZones, ...payload],
         showAddScheduleModal: false,
       };
 
@@ -103,6 +110,7 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         scheduledZones: holdingState,
+        filteredZones: holdingState,
       };
     }
 
@@ -114,21 +122,20 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         scheduledZones: tempState,
+        filteredZones: tempState,
       };
     }
     case ZoneActionTypes.FILTER_SCHEDULED_ZONES: {
       const { scheduledZones } = state;
       const { zoneName } = payload;
-      console.log(zoneName, 'zoneName');
-      const holdingArr = [...scheduledZones];
-      const filteredZones =
+      let holdingArr = [...scheduledZones];
+      holdingArr =
         zoneName === 'all'
           ? scheduledZones
-          : holdingArr.filter((zone) => zone.zone === zoneName);
-      console.log({ filteredZones, zoneName });
+          : scheduledZones.filter((zone) => zone.zone === zoneName);
       return {
         ...state,
-        scheduledZones: filteredZones,
+        filteredZones: holdingArr,
       };
     }
     default:
