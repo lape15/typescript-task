@@ -45,3 +45,8 @@ export const filterScheduledZones = (zoneName: string) => ({
   type: ZoneActionTypes.FILTER_SCHEDULED_ZONES,
   payload: { zoneName },
 });
+
+export const doShowMenu = (payload: boolean) => ({
+  type: ZoneActionTypes.SHOW_MENU,
+  payload,
+});

@@ -54,3 +54,27 @@ nav {
   right: 7px;
   transition: all 0.2s ease-out;
 }
+nav .menu_item {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  nav {
+    padding: 0 8px;
+  }
+  .header_btn h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 512px) {
+  nav {
+    align-items: center;
+  }
+  .header_btn h2 {
+    font-size: 2rem;
+  }
+  nav .menu_item {
+    display: inline-block;
+  }
+}

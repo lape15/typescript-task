@@ -7,6 +7,7 @@ export enum ZoneActionTypes {
   SAVE_EDITED_ZONE = 'SAVE_EDITED_ZONE',
   DELETE_ZONE = 'DELETE_ZONE',
   FILTER_SCHEDULED_ZONES = 'FILTER_SCHEDULED_ZONES',
+  SHOW_MENU = 'SHOW_MENU',
 }
 export interface Zone {
   name: string;
@@ -33,6 +34,10 @@ export interface changeLayout {
 }
 export interface changeTempUnit {
   type: 'CHANGE_TEMP_UNIT';
+  payload: boolean;
+}
+export interface showMenu {
+  type: ZoneActionTypes.SHOW_MENU;
   payload: boolean;
 }
 

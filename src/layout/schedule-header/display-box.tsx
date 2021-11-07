@@ -12,7 +12,7 @@ const DisplayBox = () => {
   };
 
   return (
-    <div className="item_box">
+    <div className="item_box hide">
       <label>Display:</label>
       <div className="icons_con">
         <label className="icon" title="List">

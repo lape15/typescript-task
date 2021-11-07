@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import './header.css';
 import { GlobalContext } from '../../context';
-import { changeTemperatureUnit } from '../../actions';
+import { changeTemperatureUnit, doShowMenu } from '../../actions';
 
 type Props = {
   label: string;
@@ -10,8 +10,13 @@ type Props = {
 };
 export const Header: React.FC<Props> = (props) => {
   const { dispatch, state } = useContext(GlobalContext);
+  const { showMenu } = state;
   return (
     <nav>
+      <button
+        className={`menu_item ${showMenu && 'open'}`}
+        onClick={() => dispatch(doShowMenu(!showMenu))}
+      ></button>
       <button className="header_btn">
         <h2>Schedules</h2>
       </button>

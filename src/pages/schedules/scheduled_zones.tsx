@@ -11,7 +11,7 @@ interface AZone {
 
 const getLayOutClass = (layout: string) => {
   if (layout === 'list') return 'list';
-  else return 'grid';
+  return 'grid';
 };
 const ScheduledZones = (props: any) => {
   const { state } = useContext(GlobalContext);
@@ -27,7 +27,7 @@ const ScheduledZones = (props: any) => {
           ))}
         </ul>
       ) : (
-        <div className="empty_box flex_container">
+        <div className="empty_box flex_container item-center">
           <h3 className="empty">You have no schedule</h3>
           <h4>Please add a new item</h4>
         </div>

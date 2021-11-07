@@ -29,7 +29,7 @@ export const Dropdown = () => {
   return (
     <div className="item_box">
       <label>
-        Zones:
+        <span className="text">Zones:</span>
         <select value={zone} onChange={handleZoneChange}>
           <option value="all">All zones</option>
           {zones.map((zone: { name: string; id: number }) => (

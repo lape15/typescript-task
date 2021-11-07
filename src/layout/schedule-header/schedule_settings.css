@@ -83,3 +83,24 @@ label.icon {
   border-color: var(--primary-color-shade);
   background-color: var(--primary-color-shade);
 }
+@media only screen and (max-width: 768px) {
+  .item_box.hide {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 512px) {
+  .schedule_filter {
+    padding: 10px;
+  }
+  .item_box label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  label .text {
+  }
+  .add_con {
+    display: none;
+  }
+}

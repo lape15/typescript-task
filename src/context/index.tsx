@@ -12,6 +12,7 @@ import {
   deleteZone,
   filerScheduledZones,
   ScheduledZones,
+  showMenu,
 } from '../actions/types';
 
 import { changeTempValue } from './util';
@@ -26,6 +27,7 @@ type State = {
   layout: string;
   showAddScheduleModal: boolean;
   filteredZones: [ScheduledZones];
+  showMenu: boolean;
 };
 
 type ProviderProps = {
@@ -41,7 +43,8 @@ type ZoneActions =
   | addZoneToSchedule
   | saveEditedZone
   | deleteZone
-  | filerScheduledZones;
+  | filerScheduledZones
+  | showMenu;
 
 const initialState = {
   isGrid: false,
@@ -52,6 +55,7 @@ const initialState = {
   layout: 'list',
   showAddScheduleModal: false,
   filteredZones: [],
+  showMenu: false,
 };
 
 function globalReducer(state: State, action: ZoneActions) {
@@ -136,6 +140,12 @@ function globalReducer(state: State, action: ZoneActions) {
       return {
         ...state,
         filteredZones: holdingArr,
+      };
+    }
+    case ZoneActionTypes.SHOW_MENU: {
+      return {
+        ...state,
+        showMenu: payload,
       };
     }
     default:

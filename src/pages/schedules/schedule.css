@@ -139,3 +139,17 @@
 .list_buttons button.del:hover {
   border-color: var(--danger-color);
 }
+
+@media only screen and (max-width: 768px) {
+  .list li {
+    padding: 10px;
+  }
+  .list .list_itemtemp {
+    width: 50px;
+    height: 50px;
+  }
+  .list,
+  .grid {
+    margin: 0;
+  }
+}
