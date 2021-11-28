@@ -4,15 +4,17 @@ import './pages.css';
 import ScheduleSettings from '../layout/schedule-header';
 import AddSchedule from '../component/schedule/add_schedule';
 import ScheduledZones from './schedules/scheduled_zones';
+import Zones from './zones';
 
 export const Pages = () => {
   return (
     <div className="pages">
-      <Header label="What" count={2} onIncrement={() => console.log('welp')} />
+      <Header />
       <div className="pages_con">
         <ScheduleSettings />
         <Switch>
           <Route component={ScheduledZones} path="/" exact />
+          <Route component={Zones} path="/zones" exact />
         </Switch>
       </div>
       <AddSchedule />

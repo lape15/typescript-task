@@ -3,12 +3,7 @@ import './header.css';
 import { GlobalContext } from '../../context';
 import { changeTemperatureUnit, doShowMenu } from '../../actions';
 
-type Props = {
-  label: string;
-  count: number;
-  onIncrement: () => void;
-};
-export const Header: React.FC<Props> = (props) => {
+export const Header: React.FC = () => {
   const { dispatch, state } = useContext(GlobalContext);
   const { showMenu } = state;
   return (

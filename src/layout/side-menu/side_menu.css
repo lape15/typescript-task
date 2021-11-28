@@ -123,7 +123,9 @@ button.menu_item.open::after {
   button.menu_item {
     width: 40px;
     margin: 0;
-    background-color: rgba(var(--primary-color-rgb), 0.1);
+    /* background-color: rgba(var(--primary-color-rgb), 0.1);
+     */
+    background-color: rgba(var(--primary-color-rgb), 0.2);
   }
   button.menu_item::before {
     left: 8px;

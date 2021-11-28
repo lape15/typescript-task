@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import './side_menu.css';
 import { NavLink } from 'react-router-dom';
 import { GlobalContext } from '../../context';
@@ -7,8 +7,6 @@ import { doShowMenu } from '../../actions/index';
 export const SideMenu = () => {
   const { dispatch, state } = useContext(GlobalContext);
   const { showMenu } = state;
-  const [, setshowMenu] = useState<boolean>(false);
-
   return (
     <div className={`menu_wrapper ${showMenu && 'open'}`}>
       <div className={`menu ${showMenu && 'open'}`}>
@@ -18,6 +16,7 @@ export const SideMenu = () => {
         ></button>
         <NavLink
           className="menu_link"
+          exact
           to="/"
           onClick={() => showMenu && dispatch(doShowMenu(!showMenu))}
         >
