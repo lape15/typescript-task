@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Header } from '../layout/header';
 import './pages.css';
 import ScheduleSettings from '../layout/schedule-header';
@@ -12,10 +12,10 @@ export const Pages = () => {
       <Header />
       <div className="pages_con">
         <ScheduleSettings />
-        <Switch>
-          <Route component={ScheduledZones} path="/" exact />
-          <Route component={Zones} path="/zones" exact />
-        </Switch>
+        <Routes>
+          <Route element={<ScheduledZones />} path="/" />
+          <Route element={<Zones />} path="/zones" />
+        </Routes>
       </div>
       <AddSchedule />
     </div>

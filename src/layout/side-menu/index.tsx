@@ -16,7 +16,6 @@ export const SideMenu = () => {
         ></button>
         <NavLink
           className="menu_link"
-          exact
           to="/"
           onClick={() => showMenu && dispatch(doShowMenu(!showMenu))}
         >

@@ -38,11 +38,17 @@ export const EditZone: React.FC<Props> = (props) => {
       isValid: checkValidity(),
     });
   };
+
+  function getFieldValue(key: keyof editedZone) {
+    return zoneDetails[key];
+  }
+
   const checkValidity = () => {
     let valid = true;
-    valid = zoneDetails.zone !== '' && valid;
-    valid = zoneDetails.temperature !== 0 && valid;
-    valid = zoneDetails.time !== '' && valid;
+    const zonesObj = Object.keys(zoneDetails).splice(0, 3);
+    for (let i = 0; i <= zonesObj.length; i += 1) {
+      valid = getFieldValue(zonesObj[i] as keyof editedZone) !== '' && valid;
+    }
     return valid;
   };
 
